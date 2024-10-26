@@ -103,10 +103,11 @@ class ConstructDataFrame:
         
         ifc_dictionary = defaultdict(list)
         ifc_custom_property_list = []
-        
+
+        ifc_filename, _ = os.path.splitext(IfcStore.path)
         blenderbim_spreadsheet_properties.my_workbook = 'Overview'
-        blenderbim_spreadsheet_properties.my_xlsx_file  = IfcStore.path.replace('.ifc','_blenderbim.xlsx') 
-        blenderbim_spreadsheet_properties.my_ods_file = IfcStore.path.replace('.ifc','_blenderbim.ods') 
+        blenderbim_spreadsheet_properties.my_xlsx_file  = ifc_filename + '_blenderbim.xlsx' 
+        blenderbim_spreadsheet_properties.my_ods_file = ifc_filename + '_blenderbim.ods' 
 
         
         ifc_file = ifcopenshell.open(IfcStore.path)
@@ -502,7 +503,7 @@ class WriteToXLSX(bpy.types.Operator):
         
         print (time.perf_counter() - start_time, "seconds for the .xlsx to be written")
         
-        blenderbim_spreadsheet_properties.my_file_path = IfcStore.path.replace('.ifc','_blenderbim.xlsx')
+        blenderbim_spreadsheet_properties.my_file_path = blenderbim_spreadsheet_properties.my_xlsx_file
    
         return {'FINISHED'}
     
@@ -533,7 +534,7 @@ class WriteToODS(bpy.types.Operator):
         writer_ods._save()
    
         open_file(blenderbim_spreadsheet_properties.my_ods_file)
-        blenderbim_spreadsheet_properties.my_file_path = IfcStore.path.replace('.ifc','_blenderbim.ods')
+        blenderbim_spreadsheet_properties.my_file_path = blenderbim_spreadsheet_properties.my_ods_file
         
         print (time.perf_counter() - start_time, "seconds for the .ods to be written")
 
