@@ -438,7 +438,7 @@ class WriteToXLSX(bpy.types.Operator):
         print ('xlsx file: ', blenderbim_spreadsheet_properties.my_xlsx_file)
         
         writer = pd.ExcelWriter(blenderbim_spreadsheet_properties.my_xlsx_file, engine='xlsxwriter')
-        construct_data_frame.df.to_excel(writer, sheet_name=blenderbim_spreadsheet_properties.my_workbook, startrow=1, header=False, index=False)
+        construct_data_frame.df.to_excel(writer, sheet_name=blenderbim_spreadsheet_properties.my_workbook, startrow=2, header=False, index=False)
         
         workbook  = writer.book
         #cell_format = workbook.add_format({'bold': True,'border': 1,'bg_color': '#4F81BD','font_color': 'white','font_size':14})
